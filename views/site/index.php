@@ -1,3 +1,6 @@
+<div>
+    <a href="/book/create">Добавить книгу</a>
+</div>
 <table>
     <tr>
         <th>ID</th>

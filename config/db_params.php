@@ -2,7 +2,7 @@
 
 return [
     'host' => 'localhost',
-    'dbname' => 'books',
+    'dbname' => 'books_manager',
     'user' => 'root',
     'password' => '',
 ];
