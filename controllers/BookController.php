@@ -11,10 +11,18 @@ class BookController
             var_dump($_POST);
             $result = Book::createBook($author_name, $title);
             var_dump($result);
-//            header("Location: /");
+            header("Location: /");
         }
 
-        require_once (ROOT . '/views/book/create.php');
+        require_once(ROOT . '/views/book/create.php');
+        return true;
+    }
+
+    public function actionView($bookId)
+    {
+        $book = Book::getBookById($bookId);
+
+        require_once (ROOT . '/views/book/view.php');
         return true;
     }
 }

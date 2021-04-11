@@ -11,8 +11,8 @@
     <?php foreach ($booksList as $book):?>
     <tr>
         <td><?php echo $book['id'];?></td>
-        <td><?php echo $book['author_name'];?></td>
-        <td><?php echo $book['title'];?></td>
+        <td><?php echo $book['author_name'];?></a></td>
+        <td><a href="/book/<?php echo $book['id'];?>"><?php echo $book['title'];?></td>
         <td><?php echo $book['date'];?></td>
     </tr>
     <?php endforeach;?>

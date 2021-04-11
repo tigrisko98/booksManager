@@ -6,20 +6,11 @@ class Book
     public static function getBooksList()
     {
         $db = Db::getConnection();
-        $booksList = [];
 
-        $result = $db->query('SELECT id, author_name, title, date FROM `book`');
+        $result = $db->query('SELECT * FROM `book`');
+        $result->setFetchMode(PDO::FETCH_ASSOC);
 
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $booksList[$i]['id'] = $row['id'];
-            $booksList[$i]['author_name'] = $row['author_name'];
-            $booksList[$i]['title'] = $row['title'];
-            $booksList[$i]['date'] = $row['date'];
-            $i++;
-        }
-
-        return $booksList;
+        return $result->fetchAll();
 
     }
 
@@ -38,6 +29,21 @@ class Book
 
 
         return $result->execute();
+
+    }
+
+    public static function getBookById($id)
+    {
+        $id = intval($id);
+
+        if ($id) {
+            $db = Db::getConnection();
+
+            $result = $db->query('SELECT * FROM `book` WHERE id=' . $id);
+            $result->setFetchMode(PDO::FETCH_ASSOC);
+
+            return $result->fetch();
+        }
 
     }
 }
