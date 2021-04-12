@@ -1,6 +1,7 @@
 <div>
     <a href="/book/create">Добавить книгу</a>
 </div>
+<?php if (!empty($booksList)):?>
 <table>
     <tr>
         <th>ID</th>
@@ -17,3 +18,4 @@
     </tr>
     <?php endforeach;?>
 </table>
+<?php endif;?>

@@ -1,4 +1,5 @@
-<h1>Добавление новой книги</h1>
+<?php require_once (ROOT . '/views/layouts/header.php');?>
+<h2>Добавление новой книги</h2>
 <form action="#" method="post">
     <label>Автор</label>
     <input type="text" name="author_name" placeholder="Введите автора книги"><br><br>

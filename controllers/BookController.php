@@ -21,8 +21,24 @@ class BookController
     public function actionView($bookId)
     {
         $book = Book::getBookById($bookId);
+        $commentsList = Comment::getCommentsListByBookId($bookId);
 
-        require_once (ROOT . '/views/book/view.php');
+        require_once(ROOT . '/views/book/view.php');
         return true;
+    }
+
+    public function actionComment($bookId)
+    {
+        $book = Book::getBookById($bookId);
+
+        if (isset($_POST['submit'])) {
+            $content = $_POST['content'];
+            $result = Comment::createComment($bookId, $content);
+            header("Location: /book/$bookId");
+        }
+
+        require_once(ROOT . '/views/book/comment.php');
+        return true;
+
     }
 }
