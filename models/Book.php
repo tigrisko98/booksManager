@@ -47,4 +47,31 @@ class Book
 
     }
 
+    public static function updateBookById($id, $options)
+    {
+        $db = Db::getConnection();
+
+        $sql = 'UPDATE `book` SET author_name = :author_name, title = :title WHERE id = :id';
+
+        $result = $db->prepare($sql);
+        $result->bindParam(':author_name', $options['author_name'], PDO::PARAM_STR);
+        $result->bindParam(':title', $options['title'], PDO::PARAM_STR);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+
+        return $result->execute();
+
+    }
+
+    public static function deleteBookById($id)
+    {
+        $db = Db::getConnection();
+
+        $sql = 'DELETE FROM `book` WHERE id = :id';
+
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+
+        return $result->execute();
+    }
+
 }

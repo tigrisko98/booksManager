@@ -15,6 +15,8 @@
         <td><?php echo $book['author_name'];?></a></td>
         <td><a href="/book/<?php echo $book['id'];?>"><?php echo $book['title'];?></td>
         <td><?php echo $book['date'];?></td>
+        <td><a href="/book/update/<?php echo $book['id'];?>">Редактировать</a></td>
+        <td><a href="/book/delete/<?php echo $book['id'];?>">Удалить</a></td>
     </tr>
     <?php endforeach;?>
 </table>

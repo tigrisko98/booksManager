@@ -23,22 +23,42 @@ class BookController
         $book = Book::getBookById($bookId);
         $commentsList = Comment::getCommentsListByBookId($bookId);
 
-        require_once(ROOT . '/views/book/view.php');
-        return true;
-    }
-
-    public function actionComment($bookId)
-    {
-        $book = Book::getBookById($bookId);
-
         if (isset($_POST['submit'])) {
             $content = $_POST['content'];
             $result = Comment::createComment($bookId, $content);
             header("Location: /book/$bookId");
         }
 
-        require_once(ROOT . '/views/book/comment.php');
+        require_once(ROOT . '/views/book/view.php');
         return true;
-
     }
+
+    public function actionUpdate($id)
+    {
+        $book = Book::getBookById($id);
+
+        if (isset($_POST['submit'])) {
+            $options['author_name'] = $_POST['author_name'];
+            $options['title'] = $_POST['title'];
+
+            $result = Book::updateBookById($id, $options);
+            header("Location: /");
+        }
+
+        require_once(ROOT . '/views/book/update.php');
+        return true;
+    }
+
+    public function actionDelete($id)
+    {
+        $book = Book::getBookById($id);
+
+        if (isset($_POST['submit'])) {
+            $result = Book::deleteBookById($id);
+            header("Location: /");
+        }
+        require_once (ROOT . '/views/book/delete.php');
+        return true;
+    }
+
 }

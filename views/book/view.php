@@ -2,7 +2,14 @@
 <div>
     <h2><?php echo $book['title']; ?></h2>
     <p>Автор книги: <?php echo $book['author_name']; ?></p>
-    <a href="/book/comment/<?php echo $book['id']; ?>">Оставить комментарий</a>
+    <h3>Оставить комментарий</h3>
+    <form action="#" method="post">
+        <label>Комментарий</label>
+        <p>
+            <textarea name="content" placeholder="Оставьте Ваш комментарий к книге"></textarea>
+        </p>
+        <input type="submit" name="submit" value="Отправить комментарий">
+    </form>
     <h3>Комментарии:</h3>
     <?php if (!empty($commentsList)): ?>
         <table>
