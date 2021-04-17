@@ -1,11 +1,26 @@
-<?php require_once (ROOT . '/views/layouts/header.php');?>
-<h2>Добавление новой книги</h2>
-<form action="#" method="post" enctype="multipart/form-data">
-    <label>Автор</label>
-    <input type="text" name="author_name" placeholder="Введите автора книги"><br><br>
-    <label>Название</label>
-    <input type="text" name="title" placeholder="Введите название книги"><br><br>
-    <label>Изображение книги</label><br><br>
-    <input type="file" name="image" placeholder="" value=""><br><br>
-    <input type="submit" name="submit" value="Создать книгу">
-</form>
+<?php require_once(ROOT . '/views/layouts/header.php'); ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Добавление новой книги</h2>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="author_name" class="form-label">Автор</label>
+                        <input type="text" name="author_name" class="form-control" id="author_name"
+                               placeholder="Введите автора книги">
+                    </div>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Название</label>
+                        <input type="text" name="title" class="form-control" id="author_name"
+                               placeholder="Введите название книги">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Изображение книги</label>
+                        <input type="file" name="image" class="form-control" id="image" placeholder="" value="">
+                    </div>
+                    <input type="submit" name="submit" class="btn btn-primary mb-3" value="Создать книгу">
+                </form>
+            </div>
+        </div>
+    </div>
+<?php require_once(ROOT . '/views/layouts/footer.php'); ?>

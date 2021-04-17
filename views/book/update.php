@@ -1,4 +1,5 @@
 <?php require_once (ROOT . '/views/layouts/header.php');?>
+
 <h2>Редактирование книги <?php echo $book['title'];?></h2>
 <form action="#" method="post" enctype="multipart/form-data">
     <label>Автор</label>
@@ -10,3 +11,5 @@
     <input type="file" name="image" placeholder="" value=""><br><br>
     <input type="submit" name="submit" value="Обновить данные">
 </form>
+
+<?php require_once (ROOT . '/views/layouts/footer.php');?>
