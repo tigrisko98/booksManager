@@ -28,7 +28,10 @@ class Book
         $result->bindParam(':title', $title, PDO::PARAM_STR);
 
 
-        return $result->execute();
+        if ($result->execute()) {
+            return $db->lastInsertId();
+        }
+        return 0;
 
     }
 
@@ -72,6 +75,20 @@ class Book
         $result->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $result->execute();
+    }
+
+    public static function getImage($id)
+    {
+        $noImage = 'no-image.jpg';
+
+        $path = '/upload/images/books/';
+        $pathToBookImage = $path . $id . '.jpg';
+
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToBookImage)){
+            return $pathToBookImage;
+        }
+
+        return $path . $noImage;
     }
 
 }

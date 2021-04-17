@@ -1,5 +1,6 @@
 <?php require_once (ROOT . '/views/layouts/header.php');?>
 <div>
+    <img src="<?php echo Book::getImage($book['id']);?>" width="300" alt="">
     <h2><?php echo $book['title']; ?></h2>
     <p>Автор книги: <?php echo $book['author_name']; ?></p>
     <h3>Оставить комментарий</h3>

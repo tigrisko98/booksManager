@@ -8,9 +8,11 @@ class BookController
         if (isset($_POST['submit'])) {
             $author_name = $_POST['author_name'];
             $title = $_POST['title'];
-            var_dump($_POST);
-            $result = Book::createBook($author_name, $title);
-            var_dump($result);
+            $id = Book::createBook($author_name, $title);
+            if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+                move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$id}.jpg");
+            }
+
             header("Location: /");
         }
 
@@ -42,6 +44,10 @@ class BookController
             $options['title'] = $_POST['title'];
 
             $result = Book::updateBookById($id, $options);
+            if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+                move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$id}.jpg");
+            }
+
             header("Location: /");
         }
 
@@ -57,7 +63,7 @@ class BookController
             $result = Book::deleteBookById($id);
             header("Location: /");
         }
-        require_once (ROOT . '/views/book/delete.php');
+        require_once(ROOT . '/views/book/delete.php');
         return true;
     }
 
