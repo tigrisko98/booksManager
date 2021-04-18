@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div class="col-3">
             <div class="card" style="width: 18rem;">
                 <img src="<?php echo Book::getImage($book['id']); ?>" class="card-img-top" width="200" alt="">
                 <div class="card-body">
@@ -10,6 +10,8 @@
                     <p class="card-text">Автор книги: <?php echo $book['author_name']; ?></p>
                 </div>
             </div>
+        </div>
+        <div class="col-9">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="leave-comment-tab" data-bs-toggle="tab"
@@ -27,17 +29,17 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="leave-comment" role="tabpanel"
                      aria-labelledby="leave-comment-tab">
-                    <h3>Оставить комментарий</h3>
+                    <h4>Оставить комментарий</h4>
                     <form action="#" method="post">
-                        <label>Комментарий</label>
+                        <label for="content" class="form-label">Комментарий</label>
                         <p>
-                            <textarea name="content" placeholder="Оставьте Ваш комментарий к книге"></textarea>
+                            <textarea name="content" class="form-control" id="content" placeholder="Оставьте Ваш комментарий к книге"></textarea>
                         </p>
-                        <input type="submit" name="submit" value="Отправить комментарий">
+                        <input type="submit" name="submit" class="btn btn-primary mb-3" value="Отправить комментарий">
                     </form>
                 </div>
                 <div class="tab-pane fade" id="comments-list" role="tabpanel" aria-labelledby="comments-list-tab">
-                    <h3>Комментарии:</h3>
+                    <h4>Комментарии:</h4>
                     <?php if (!empty($commentsList)): ?>
                         <table class="table">
                             <tr>
@@ -62,4 +64,4 @@
         </div>
     </div>
 </div>
-<?php require_once(ROOT . '/views/layouts/footer.php'); ?>
+    <?php require_once(ROOT . '/views/layouts/footer.php'); ?>

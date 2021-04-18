@@ -61,9 +61,10 @@ class BookController
 
         if (isset($_POST['submit'])) {
             $result = Book::deleteBookById($id);
+            unlink($_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$id}.jpg");
             header("Location: /");
         }
-        require_once(ROOT . '/views/book/delete.php');
+
         return true;
     }
 

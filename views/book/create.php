@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2>Добавление новой книги</h2>
+                <h3>Добавление новой книги</h3>
                 <form action="#" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="author_name" class="form-label">Автор</label>
@@ -11,7 +11,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="title" class="form-label">Название</label>
-                        <input type="text" name="title" class="form-control" id="author_name"
+                        <input type="text" name="title" class="form-control" id="title"
                                placeholder="Введите название книги">
                     </div>
                     <div class="mb-3">

@@ -20,12 +20,32 @@
                             <td><?php echo $book['date']; ?></td>
                             <td><a href="/book/update/<?php echo $book['id']; ?>"
                                    class="btn btn-primary">Редактировать</a>
-                                <a href="/book/delete/<?php echo $book['id']; ?>" class="btn btn-danger">Удалить</a>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Удалить</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
             <?php endif; ?>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            <p>Вы уверены, что хотите удалить книгу <?php echo $book['title'] ?></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <form action="/book/delete/<?php echo $book['id']; ?>" method="post">
+                                <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
