@@ -8,7 +8,7 @@ class BookController
         if (isset($_POST['submit'])) {
             $author_name = $_POST['author_name'];
             $title = $_POST['title'];
-            $id = Book::createBook($author_name, $title);
+            $id = (new Book)->createBook($author_name, $title);
             if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                 move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$id}.jpg");
             }
@@ -22,12 +22,12 @@ class BookController
 
     public function actionView($bookId)
     {
-        $book = Book::getBookById($bookId);
-        $commentsList = Comment::getCommentsListByBookId($bookId);
+        $book = (new Book)->getBookById($bookId);
+        $commentsList = (new Comment)->getCommentsListByBookId($bookId);
 
         if (isset($_POST['submit'])) {
             $content = $_POST['content'];
-            $result = Comment::createComment($bookId, $content);
+            $result = (new Comment)->createComment($bookId, $content);
             header("Location: /book/$bookId");
         }
 
@@ -37,13 +37,13 @@ class BookController
 
     public function actionUpdate($id)
     {
-        $book = Book::getBookById($id);
+        $book = (new Book)->getBookById($id);
 
         if (isset($_POST['submit'])) {
             $options['author_name'] = $_POST['author_name'];
             $options['title'] = $_POST['title'];
 
-            $result = Book::updateBookById($id, $options);
+            $result = (new Book)->updateBookById($id, $options);
             if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                 move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$id}.jpg");
             }
@@ -59,7 +59,7 @@ class BookController
     {
 
         if (isset($_POST['submit'])) {
-            $result = Book::deleteBookById($id);
+            $result = (new Book)->deleteBookById($id);
             unlink($_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$id}.jpg");
             header("Location: /");
         }
