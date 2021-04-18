@@ -57,7 +57,6 @@ class BookController
 
     public function actionDelete($id)
     {
-        $book = Book::getBookById($id);
 
         if (isset($_POST['submit'])) {
             $result = Book::deleteBookById($id);

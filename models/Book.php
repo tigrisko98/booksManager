@@ -37,9 +37,8 @@ class Book
 
     public static function getBookById($id)
     {
-        $id = intval($id);
 
-        if ($id) {
+        if ($id = intval($id)) {
             $db = Db::getConnection();
 
             $result = $db->query('SELECT * FROM `book` WHERE id=' . $id);
