@@ -19,7 +19,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Изображение книги</label><br>
-                        <img src="<?php echo Book::getImage($book['id']); ?>" width="200" alt=""><br><br>
+                        <img src="<?php echo (new Book)->getImage($book['id']); ?>" width="200" alt=""><br><br>
                         <input type="file" name="image" class="form-control" id="image" placeholder="" value="">
                     </div>
                     <input type="submit" name="submit" class="btn btn-primary mb-3" value="Обновить данные">

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-3">
             <div class="card" style="width: 18rem;">
-                <img src="<?php echo Book::getImage($book['id']); ?>" class="card-img-top" width="200" alt="">
+                <img src="<?php echo (new Book)->getImage($book['id']); ?>" class="card-img-top" width="200" alt="">
                 <div class="card-body">
                     <h4><?php echo $book['title']; ?></h4>
                     <p class="card-text">Автор книги: <?php echo $book['author_name']; ?></p>

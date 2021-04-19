@@ -5,6 +5,7 @@ class BookController
 {
     public function actionCreate()
     {
+        $booksList = (new Book)->getBooksList();
         if (isset($_POST['submit'])) {
             $author_name = $_POST['author_name'];
             $title = $_POST['title'];
@@ -59,8 +60,8 @@ class BookController
     {
 
         if (isset($_POST['submit'])) {
-            $result = (new Book)->deleteBookById($id);
-            unlink($_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$id}.jpg");
+            $result = Book::deleteBookById($id);
+            echo $result;
             header("Location: /");
         }
 

@@ -13,7 +13,7 @@ class Book
     public function getBooksList()
     {
 
-        $result = $this->db->query('SELECT * FROM `book`');
+        $result = $this->db->query('SELECT * FROM `book` WHERE is_archived = 0');
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
         return $result->fetchAll();
@@ -24,9 +24,9 @@ class Book
     {
 
         $sql = 'INSERT INTO book '
-            . '(author_name, title)'
+            . '(author_name, title, is_archived)'
             . 'VALUES '
-            . '(:author_name, :title)';
+            . '(:author_name, :title, 0)';
 
         $result = $this->db->prepare($sql);
         $result->bindParam(':author_name', $author_name, PDO::PARAM_STR);
@@ -67,18 +67,18 @@ class Book
 
     }
 
-    public function deleteBookById($id)
+    public static function deleteBookById($id)
     {
+        $db = Db::getConnection();
+        $sql = 'UPDATE `book` SET is_archived = 1 WHERE id = :id';
 
-        $sql = 'DELETE FROM `book` WHERE id = :id';
-
-        $result = $this->db->prepare($sql);
+        $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $result->execute();
     }
 
-    public static function getImage($id)
+    public function getImage($id)
     {
         $noImage = 'no-image.jpg';
 
