@@ -18,6 +18,11 @@
                                value="<?php echo $book['title']; ?>">
                     </div>
                     <div class="mb-3">
+                        <label for="publication_year" class="form-label">Год публикации</label>
+                        <input type="text" name="publication_year" class="form-control" id="publication_year"
+                               placeholder="Введите год публикации книги" value="<?php echo $book['publication_year']; ?>">
+                    </div>
+                    <div class="mb-3">
                         <label for="image" class="form-label">Изображение книги</label><br>
                         <img src="<?php echo (new Book)->getImage($book['id']); ?>" width="200" alt=""><br><br>
                         <input type="file" name="image" class="form-control" id="image" placeholder="" value="">

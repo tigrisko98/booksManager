@@ -7,9 +7,8 @@ class BookController
     {
         $booksList = (new Book)->getBooksList();
         if (isset($_POST['submit'])) {
-            $author_name = $_POST['author_name'];
-            $title = $_POST['title'];
-            $id = (new Book)->createBook($author_name, $title);
+
+            $id = (new Book)->createBook($_POST);
             if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                 move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$id}.jpg");
             }

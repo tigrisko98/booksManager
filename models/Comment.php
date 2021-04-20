@@ -13,7 +13,7 @@ class Comment
     public function createComment($bookId, $content)
     {
 
-        $sql = 'INSERT INTO `comment` (book_id, content) VALUES (:book_id, :content)';
+        $sql = 'INSERT INTO `comments` (book_id, content) VALUES (:book_id, :content)';
         $result = $this->db->prepare($sql);
 
         $result->bindParam(':book_id', $bookId, PDO::PARAM_INT);
@@ -24,7 +24,7 @@ class Comment
 
     public function getCommentsListByBookId($bookId)
     {
-        $result = $this->db->query('SELECT * FROM `comment` WHERE book_id = ' . $bookId);
+        $result = $this->db->query('SELECT * FROM `comments` WHERE book_id = ' . $bookId);
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
         return $result->fetchAll();

@@ -9,14 +9,16 @@
                         <th scope="col">ID</th>
                         <th scope="col">Автор</th>
                         <th scope="col">Название</th>
+                        <th scope="col">Год публикации</th>
                         <th scope="col">Дата создания</th>
                         <th scope="col"></th>
                     </tr>
                     <?php foreach ($booksList as $book): ?>
                         <tr>
                             <td><?php echo $book['id']; ?></td>
-                            <td><?php echo $book['author_name']; ?></a></td>
+                            <td><?php echo $book['author_name']; ?></td>
                             <td><a href="/book/<?php echo $book['id']; ?>"><?php echo $book['title']; ?></td>
+                            <td><?php echo $book['publication_year']; ?></td>
                             <td><?php echo $book['date']; ?></td>
                             <td><a href="/book/update/<?php echo $book['id']; ?>"
                                    class="btn btn-primary">Редактировать</a>

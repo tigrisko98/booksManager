@@ -13,24 +13,25 @@ class Book
     public function getBooksList()
     {
 
-        $result = $this->db->query('SELECT * FROM `book` WHERE is_archived = 0');
+        $result = $this->db->query('SELECT * FROM `books` WHERE is_archived = 0');
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
         return $result->fetchAll();
 
     }
 
-    public function createBook($author_name, $title)
+    public function createBook($options)
     {
 
-        $sql = 'INSERT INTO book '
-            . '(author_name, title, is_archived)'
+        $sql = 'INSERT INTO `books` '
+            . '(author_name, title, is_archived, publication_year)'
             . 'VALUES '
-            . '(:author_name, :title, 0)';
+            . '(:author_name, :title, 0, :publication_year)';
 
         $result = $this->db->prepare($sql);
-        $result->bindParam(':author_name', $author_name, PDO::PARAM_STR);
-        $result->bindParam(':title', $title, PDO::PARAM_STR);
+        $result->bindParam(':author_name', $options['author_name'], PDO::PARAM_STR);
+        $result->bindParam(':title', $options['title'], PDO::PARAM_STR);
+        $result->bindParam(':publication_year', $options['publication_year'], PDO::PARAM_INT);
 
 
         if ($result->execute()) {
@@ -45,7 +46,7 @@ class Book
 
         if ($id = intval($id)) {
 
-            $result = $this->db->query('SELECT * FROM `book` WHERE id=' . $id);
+            $result = $this->db->query('SELECT * FROM `books` WHERE id=' . $id);
             $result->setFetchMode(PDO::FETCH_ASSOC);
 
             return $result->fetch();
@@ -56,11 +57,12 @@ class Book
     public function updateBookById($id, $options)
     {
 
-        $sql = 'UPDATE `book` SET author_name = :author_name, title = :title WHERE id = :id';
+        $sql = 'UPDATE `books` SET author_name = :author_name, title = :title, publication_year = :publication_year WHERE id = :id';
 
         $result = $this->db->prepare($sql);
         $result->bindParam(':author_name', $options['author_name'], PDO::PARAM_STR);
         $result->bindParam(':title', $options['title'], PDO::PARAM_STR);
+        $result->bindParam(':publication_year', $options['publication_year'], PDO::PARAM_INT);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $result->execute();
@@ -70,7 +72,7 @@ class Book
     public static function deleteBookById($id)
     {
         $db = Db::getConnection();
-        $sql = 'UPDATE `book` SET is_archived = 1 WHERE id = :id';
+        $sql = 'UPDATE `books` SET is_archived = 1 WHERE id = :id';
 
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
