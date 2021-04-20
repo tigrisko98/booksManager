@@ -9,6 +9,7 @@
                     <h4><?php echo $book['title']; ?></h4>
                     <p class="card-text">Автор книги: <?php echo $book['author_name']; ?></p>
                     <p class="card-text">Год публикации: <?php echo $book['publication_year'];?></p>
+                    <p class="card-text">Количество просмотров: <?php echo $book['views'];?></p>
                 </div>
             </div>
         </div>

@@ -25,6 +25,18 @@ class BookController
         $book = (new Book)->getBookById($bookId);
         $commentsList = (new Comment)->getCommentsListByBookId($bookId);
 
+        $views = $book['views'];
+
+        if (isset($_COOKIE[$bookId])) {
+
+            $views = intval($_COOKIE[$bookId]);
+            $views++;
+            Book::updateViews($bookId);
+
+        }
+
+        setcookie($bookId, $views);
+
         if (isset($_POST['submit'])) {
             $content = $_POST['content'];
             $result = (new Comment)->createComment($bookId, $content);
@@ -59,7 +71,7 @@ class BookController
     {
 
         if (isset($_POST['submit'])) {
-            $result = Book::deleteBookById($id);
+            $result = (new Book)->deleteBookById($id);
             echo $result;
             header("Location: /");
         }

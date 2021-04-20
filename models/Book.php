@@ -69,12 +69,11 @@ class Book
 
     }
 
-    public static function deleteBookById($id)
+    public function deleteBookById($id)
     {
-        $db = Db::getConnection();
         $sql = 'UPDATE `books` SET is_archived = 1 WHERE id = :id';
 
-        $result = $db->prepare($sql);
+        $result = $this->db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $result->execute();
@@ -87,11 +86,23 @@ class Book
         $path = '/upload/images/books/';
         $pathToBookImage = $path . $id . '.jpg';
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToBookImage)){
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToBookImage)) {
             return $pathToBookImage;
         }
 
         return $path . $noImage;
     }
 
+    public static function updateViews($id)
+    {
+        $db = Db::getConnection();
+        $sql = 'UPDATE `books` SET views = :views WHERE id = :id';
+
+        $result = $db->prepare($sql);
+        $result->bindParam(':views', $_COOKIE[$id], PDO::PARAM_INT);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+
+        return $result->execute();
+
+    }
 }
