@@ -25,12 +25,13 @@ class BookController
         $book = new Book;
         $bookData = $book->getBookById($bookId);
         $book->updateViews($bookId);
-        $commentsList = (new Comment)->getCommentsListByBookId($bookId);
+        $comment = new Comment;
+        $commentsList = $comment->getCommentsListByBookId($bookId);
+        $averageRating = $comment->getAverageRating($bookId);
 
 
         if (isset($_POST['submit'])) {
-            $content = $_POST['content'];
-            $result = (new Comment)->createComment($bookId, $content);
+            $result = (new Comment)->createComment($bookId, $_POST);
             header("Location: /book/$bookId");
         }
 
