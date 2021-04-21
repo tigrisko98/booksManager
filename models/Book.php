@@ -3,13 +3,22 @@
 
 class Book
 {
+    /**
+     * @var PDO
+     */
     private $db;
 
+    /**
+     * Book constructor.
+     */
     public function __construct()
     {
         $this->db = Db::getConnection();
     }
 
+    /**
+     * @return array
+     */
     public function getBooksList()
     {
 
@@ -20,6 +29,10 @@ class Book
 
     }
 
+    /**
+     * @param $options
+     * @return int|string
+     */
     public function createBook($options)
     {
 
@@ -41,6 +54,10 @@ class Book
 
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getBookById($id)
     {
 
@@ -54,6 +71,11 @@ class Book
 
     }
 
+    /**
+     * @param $id
+     * @param $options
+     * @return bool
+     */
     public function updateBookById($id, $options)
     {
 
@@ -69,6 +91,10 @@ class Book
 
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function deleteBookById($id)
     {
         $sql = 'UPDATE `books` SET is_archived = 1 WHERE id = :id';
@@ -79,6 +105,10 @@ class Book
         return $result->execute();
     }
 
+    /**
+     * @param $id
+     * @return string
+     */
     public function getImage($id)
     {
         $noImage = 'no-image.jpg';
@@ -93,15 +123,18 @@ class Book
         return $path . $noImage;
     }
 
-    public static function updateViews($id)
+
+    /**
+     * @param $id
+     */
+    public function updateViews($id):void
     {
-        $db = Db::getConnection();
         $sql = 'UPDATE `books` SET views = views+1 WHERE id = :id';
 
-        $result = $db->prepare($sql);
+        $result = $this->db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
 
-        return $result->execute();
+        $result->execute();
 
     }
 }

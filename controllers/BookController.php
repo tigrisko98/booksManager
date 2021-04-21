@@ -22,11 +22,10 @@ class BookController
 
     public function actionView($bookId)
     {
-        $book = (new Book)->getBookById($bookId);
+        $book = new Book;
+        $bookData = $book->getBookById($bookId);
+        $book->updateViews($bookId);
         $commentsList = (new Comment)->getCommentsListByBookId($bookId);
-
-        Book::updateViews($bookId);
-
 
 
         if (isset($_POST['submit'])) {

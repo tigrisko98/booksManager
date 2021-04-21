@@ -4,12 +4,13 @@
     <div class="row">
         <div class="col-3">
             <div class="card" style="width: 18rem;">
-                <img src="<?php echo (new Book)->getImage($book['id']); ?>" class="card-img-top" width="200" alt="">
+                <img src="<?php echo $bookImage = $book->getImage($bookData['id']);  ?>" class="card-img-top" width="200" alt="">
+
                 <div class="card-body">
-                    <h4><?php echo $book['title']; ?></h4>
-                    <p class="card-text">Автор книги: <?php echo $book['author_name']; ?></p>
-                    <p class="card-text">Год публикации: <?php echo $book['publication_year'];?></p>
-                    <p class="card-text">Количество просмотров: <?php echo $book['views'];?></p>
+                    <h4><?php echo $bookData['title']; ?></h4>
+                    <p class="card-text">Автор книги: <?php echo $bookData['author_name']; ?></p>
+                    <p class="card-text">Год публикации: <?php echo $bookData['publication_year'];?></p>
+                    <p class="card-text">Количество просмотров: <?php echo $bookData['views'];?></p>
                 </div>
             </div>
         </div>
@@ -66,4 +67,5 @@
         </div>
     </div>
 </div>
+
     <?php require_once(ROOT . '/views/layouts/footer.php'); ?>
