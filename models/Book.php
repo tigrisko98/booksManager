@@ -96,10 +96,9 @@ class Book
     public static function updateViews($id)
     {
         $db = Db::getConnection();
-        $sql = 'UPDATE `books` SET views = :views WHERE id = :id';
+        $sql = 'UPDATE `books` SET views = views+1 WHERE id = :id';
 
         $result = $db->prepare($sql);
-        $result->bindParam(':views', $_COOKIE[$id], PDO::PARAM_INT);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $result->execute();

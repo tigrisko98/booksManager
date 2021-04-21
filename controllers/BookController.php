@@ -25,17 +25,9 @@ class BookController
         $book = (new Book)->getBookById($bookId);
         $commentsList = (new Comment)->getCommentsListByBookId($bookId);
 
-        $views = $book['views'];
+        Book::updateViews($bookId);
 
-        if (isset($_COOKIE[$bookId])) {
 
-            $views = intval($_COOKIE[$bookId]);
-            $views++;
-            Book::updateViews($bookId);
-
-        }
-
-        setcookie($bookId, $views);
 
         if (isset($_POST['submit'])) {
             $content = $_POST['content'];
