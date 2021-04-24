@@ -6,14 +6,14 @@ class BookController
     public function actionCreate()
     {
         $booksList = (new Book)->getBooksList();
+
         if (isset($_POST['submit'])) {
 
             $id = (new Book)->createBook($_POST);
             if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                 move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$id}.jpg");
+                header("Location: /");
             }
-
-            header("Location: /");
         }
 
         require_once(ROOT . '/views/book/create.php');

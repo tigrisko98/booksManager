@@ -4,13 +4,14 @@
     <div class="row">
         <div class="col-3">
             <div class="card" style="width: 18rem;">
-                <img src="<?php echo $bookImage = $book->getImage($bookData['id']);  ?>" class="card-img-top" width="200" alt="">
+                <img src="<?php echo $bookImage = $book->getImage($bookData['id']); ?>" class="card-img-top" width="200"
+                     alt="">
                 <div class="card-body">
                     <h4><?php echo $bookData['title']; ?></h4>
                     <p class="card-text">Автор книги: <?php echo $bookData['author_name']; ?></p>
-                    <p class="card-text">Год публикации: <?php echo $bookData['publication_year'];?></p>
-                    <p class="card-text">Количество просмотров: <?php echo $bookData['views'];?></p>
-                    <p class="card-text">Рейтинг книги: <?php echo round($averageRating, 1);?></p>
+                    <p class="card-text">Год публикации: <?php echo $bookData['publication_year']; ?></p>
+                    <p class="card-text">Количество просмотров: <?php echo $bookData['views']; ?></p>
+                    <p class="card-text">Рейтинг книги: <?php echo round($averageRating, 1); ?></p>
                 </div>
             </div>
         </div>
@@ -36,22 +37,20 @@
                     <form action="#" method="post">
                         <label for="content" class="form-label">Комментарий</label>
                         <p>
-                            <textarea name="content" class="form-control" id="content" placeholder="Оставьте Ваш комментарий к книге"></textarea>
+                            <textarea name="content" class="form-control" id="content"
+                                      placeholder="Оставьте Ваш комментарий к книге"></textarea>
                         </p>
                         <label for="rating" class="form-label">Оценка</label>
                         <p>
-                            <select name="rating" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select name="rating" class="form-select form-select-sm"
+                                    aria-label=".form-select-sm example">
                                 <option selected>Поставьте оценку книге</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
+                                <?php for ($i = 1; $i <= 10; $i++) {
+                                    echo "<option value=" . $i . ">$i</option>";
+                                }
+                                ?>
+
+
                             </select>
                         </p>
                         <input type="submit" name="submit" class="btn btn-primary mb-3" value="Отправить комментарий">
