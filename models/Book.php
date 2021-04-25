@@ -33,24 +33,22 @@ class Book
      * @param $options
      * @return int|string
      */
-    public function createBook($options)
+    public function createBook($options, $image_url)
     {
 
         $sql = 'INSERT INTO `books` '
-            . '(author_name, title, is_archived, publication_year)'
+            . '(author_name, title, is_archived, publication_year, image_url)'
             . 'VALUES '
-            . '(:author_name, :title, 0, :publication_year)';
+            . '(:author_name, :title, 0, :publication_year, :image_url)';
 
         $result = $this->db->prepare($sql);
         $result->bindParam(':author_name', $options['author_name'], PDO::PARAM_STR);
         $result->bindParam(':title', $options['title'], PDO::PARAM_STR);
         $result->bindParam(':publication_year', $options['publication_year'], PDO::PARAM_INT);
+        $result->bindParam(':image_url', $image_url, PDO::PARAM_STR);
 
 
-        if ($result->execute()) {
-            return $this->db->lastInsertId();
-        }
-        return 0;
+       return $result->execute();
 
     }
 
@@ -104,25 +102,6 @@ class Book
 
         return $result->execute();
     }
-
-    /**
-     * @param $id
-     * @return string
-     */
-    public function getImage($id)
-    {
-        $noImage = 'no-image.jpg';
-
-        $path = '/upload/images/books/';
-        $pathToBookImage = $path . $id . '.jpg';
-
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $pathToBookImage)) {
-            return $pathToBookImage;
-        }
-
-        return $path . $noImage;
-    }
-
 
     /**
      * @param $id
