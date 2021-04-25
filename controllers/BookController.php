@@ -9,14 +9,7 @@ class BookController
         $booksList = $book->getBooksList();
         if (isset($_POST['submit'])) {
 
-            if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-                move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$_FILES['image']['name']}");
-            }
-            if (!empty($_FILES['image']['name'])) {
-                $image_url = "/upload/images/books/{$_FILES['image']['name']}";
-            } else {
-                $image_url = "/upload/images/books/no-image.jpg";
-            }
+            $image_url = $book->uploadImage();
             $book->createBook($_POST, $image_url);
             header("Location: /");
 
@@ -47,18 +40,21 @@ class BookController
 
     public function actionUpdate($id)
     {
-        $book = (new Book)->getBookById($id);
+        $book = (new Book);
+        $bookData = $book->getBookById($id);
 
         if (isset($_POST['submit'])) {
-            $options['author_name'] = $_POST['author_name'];
-            $options['title'] = $_POST['title'];
 
-            $result = (new Book)->updateBookById($id, $options);
-            if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-                move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/books/{$id}.jpg");
+            if (empty($_FILES['image']['name'])) {
+                $image_url = $bookData['image_url'];
+            } else {
+                $image_url = $book->uploadImage();
             }
 
-            header("Location: /");
+            $book->updateBookById($id, $_POST, $image_url);
+
+//            header("Location: /");
+
         }
 
         require_once(ROOT . '/views/book/update.php');

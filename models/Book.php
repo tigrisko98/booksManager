@@ -48,7 +48,7 @@ class Book
         $result->bindParam(':image_url', $image_url, PDO::PARAM_STR);
 
 
-       return $result->execute();
+        return $result->execute();
 
     }
 
@@ -74,15 +74,21 @@ class Book
      * @param $options
      * @return bool
      */
-    public function updateBookById($id, $options)
+    public function updateBookById($id, $options, $image_url)
     {
 
-        $sql = 'UPDATE `books` SET author_name = :author_name, title = :title, publication_year = :publication_year WHERE id = :id';
+        $sql = 'UPDATE `books` SET 
+                        author_name = :author_name, 
+                        title = :title, 
+                        publication_year = :publication_year, 
+                        image_url = :image_url 
+                        WHERE id = :id';
 
         $result = $this->db->prepare($sql);
         $result->bindParam(':author_name', $options['author_name'], PDO::PARAM_STR);
         $result->bindParam(':title', $options['title'], PDO::PARAM_STR);
         $result->bindParam(':publication_year', $options['publication_year'], PDO::PARAM_INT);
+        $result->bindParam(':image_url', $image_url, PDO::PARAM_STR);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $result->execute();
@@ -103,10 +109,27 @@ class Book
         return $result->execute();
     }
 
+    public function uploadImage()
+    {
+        $noImage = "/upload/images/books/no-image.jpg";
+        $image_url = "/upload/images/books/{$_FILES['image']['name']}";
+
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $image_url);
+        }
+
+        if (!empty($_FILES['image']['name'])) {
+            return $image_url;
+        }
+
+        return $noImage;
+
+    }
+
     /**
      * @param $id
      */
-    public function updateViews($id):void
+    public function updateViews($id): void
     {
         $sql = 'UPDATE `books` SET views = views+1 WHERE id = :id';
 
