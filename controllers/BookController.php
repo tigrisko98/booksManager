@@ -52,8 +52,7 @@ class BookController
             }
 
             $book->updateBookById($id, $_POST, $image_url);
-
-//            header("Location: /");
+            header("Location: /");
 
         }
 
