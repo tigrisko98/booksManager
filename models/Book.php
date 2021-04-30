@@ -37,13 +37,15 @@ class Book
     {
 
         $sql = 'INSERT INTO `books` '
-            . '(author_name, title, is_archived, publication_year, image_url)'
+            . '(author_name, slug, title, is_archived, publication_year, image_url)'
             . 'VALUES '
-            . '(:author_name, :title, 0, :publication_year, :image_url)';
+            . '(:author_name, :slug, :title, 0, :publication_year, :image_url)';
 
         $result = $this->db->prepare($sql);
         $result->bindParam(':author_name', $options['author_name'], PDO::PARAM_STR);
         $result->bindParam(':title', $options['title'], PDO::PARAM_STR);
+        $slug = trim(mb_strtolower($options['title']));
+        $result->bindParam(':slug', $slug, PDO::PARAM_STR);
         $result->bindParam(':publication_year', $options['publication_year'], PDO::PARAM_INT);
         $result->bindParam(':image_url', $image_url, PDO::PARAM_STR);
 
@@ -79,6 +81,7 @@ class Book
 
         $sql = 'UPDATE `books` SET 
                         author_name = :author_name, 
+                        slug = :slug,
                         title = :title, 
                         publication_year = :publication_year, 
                         image_url = :image_url 
@@ -86,6 +89,8 @@ class Book
 
         $result = $this->db->prepare($sql);
         $result->bindParam(':author_name', $options['author_name'], PDO::PARAM_STR);
+        $slug = trim(mb_strtolower($options['title']));
+        $result->bindParam(':slug', $slug, PDO::PARAM_STR);
         $result->bindParam(':title', $options['title'], PDO::PARAM_STR);
         $result->bindParam(':publication_year', $options['publication_year'], PDO::PARAM_INT);
         $result->bindParam(':image_url', $image_url, PDO::PARAM_STR);
@@ -139,4 +144,5 @@ class Book
         $result->execute();
 
     }
+
 }

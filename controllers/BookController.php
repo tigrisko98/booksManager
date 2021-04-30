@@ -9,9 +9,9 @@ class BookController
         $booksList = $book->getBooksList();
         if (isset($_POST['submit'])) {
 
-            $image_url = $book->uploadImage();
-            $book->createBook($_POST, $image_url);
-            header("Location: /");
+                $image_url = $book->uploadImage();
+                $book->createBook($_POST, $image_url);
+                header("Location: /");
 
         }
 
